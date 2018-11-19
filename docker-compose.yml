@@ -40,6 +40,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - influxdb
+      - mosquitto
 
   kapacitor:
   # Full tag list: https://hub.docker.com/r/library/kapacitor/tags/
@@ -60,6 +61,12 @@ services:
     ports:
       # The API for Kapacitor is served on port 9092
       - "9092:9092"
+  mosquitto:
+    container_name: mosquitto
+    image: toke/mosquitto
+    ports:
+      - "1883:1883"
+      - "9001:9001"
 
   chronograf:
     # Full tag list: https://hub.docker.com/r/library/chronograf/tags/
