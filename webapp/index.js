@@ -3,7 +3,7 @@ var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser')
 var mqtt = require('mqtt');
-var client  = mqtt.connect('mqtt://localhost:1883');
+var client  = mqtt.connect('mqtt://mosquitto');
 
 var app = express();
 
@@ -21,7 +21,9 @@ app.get('/', function (req, res) {
 });
 
 app.post('/blink', function(req, res) {
-    var time = req.body.time;
+    console.log("Received blink");
+    var time = req.body.time; 
+    console.log(time);
     res.writeHead(200);
     res.end();
     client.publish('led', time);
