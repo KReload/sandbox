@@ -98,3 +98,9 @@ services:
       context: ./documentation
     ports:
       - "3010:3000"
+
+  webapp:
+    build:
+      context: ./webapp
+    ports:
+      - "8080:8080"
