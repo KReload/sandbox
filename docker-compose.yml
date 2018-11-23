@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   influxdb:
     # Full tag list: https://hub.docker.com/r/library/influxdb/tags/
@@ -63,7 +63,7 @@ services:
       - "9092:9092"
   mosquitto:
     container_name: mosquitto
-    image: toke/mosquitto
+    image: eclipse-mosquitto
     ports:
       - "1883:1883"
       - "9001:9001"

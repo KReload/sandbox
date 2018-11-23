@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM arm32v7/debian:latest
 
 EXPOSE 3010:3000
 
@@ -8,3 +8,4 @@ COPY builds/documentation /documentation/
 COPY static/ /documentation/static
 
 CMD ["/documentation/documentation", "-filePath", "/documentation/"]
+
