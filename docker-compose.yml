@@ -93,15 +93,9 @@ services:
       - influxdb
       - telegraf
 
-  documentation:
+  api-bob:
     build:
-      context: ./documentation
-    ports:
-      - "3010:3000"
-
-  webapp:
-    build:
-      context: ./webapp
+      context: ./rest-api
     ports:
       - "8080:8080"
     links:
