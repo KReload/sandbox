@@ -51,7 +51,7 @@ func getTemperature(w http.ResponseWriter,r*http.Request){
 }
 
 func writeTemp(c client.Client, temp int) {
-	temp_tags := map[string]string{"topic": "temperature"}
+	temp_tags := map[string]string{"sensor": "temperature"}
 	temp_fields:= map[string]interface{}{
 		"value": temp,
 	}
@@ -76,7 +76,7 @@ func writeTemp(c client.Client, temp int) {
 }
 
 func writeHum(c client.Client, hum int) {
-	temp_tags := map[string]string{"topic": "humidity"}
+	temp_tags := map[string]string{"sensor": "humidity"}
 	temp_fields:= map[string]interface{}{
 		"value": hum,
 	}
