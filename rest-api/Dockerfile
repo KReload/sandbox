@@ -4,7 +4,7 @@ WORKDIR /go/src
 
 COPY . .
 
-RUN cd api-bob && go get -d -v && go build -v -o api-bob
+RUN cd api-bob && go get -d -v && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o api-bob
 
 FROM scratch
 
