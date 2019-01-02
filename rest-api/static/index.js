@@ -74,8 +74,8 @@ var chart3 = new Chart(ctx3, {
     data: {
         datasets: [{
             label: "Température MQTT",
-            backgroundColor: 'rgb(0, 99, 255)',
-            borderColor: 'rgb(0, 99, 132)',
+            backgroundColor: 'rgb(200, 99, 0)',
+            borderColor: 'rgb(200, 99, 0)',
             data: [],
         }]
     },
@@ -101,7 +101,7 @@ var chart4 = new Chart(ctx4, {
     data: {
         datasets: [{
             label: "Humidité MQTT",
-            backgroundColor: 'rgb(0, 99, 255)',
+            backgroundColor: 'rgb(0, 99, 200)',
             borderColor: 'rgb(0, 99, 132)',
             data: [],
         }]
