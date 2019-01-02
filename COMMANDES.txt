@@ -1,2 +1,4 @@
-curl -X POST -d 'temp=30&hum=50' localhost:8080/api/state
-mosquitto_pub -t temperature -m "temperature value=30" -h localhost -p 1883
+mosquitto_pub -t humidity -m "mqttdht22 hum=20" -h <ip> -p 1883
+mosquitto_pub -t temperature -m "mqttdht22 temp=50" -h <ip> -p 1883
+curl -X POST -d 'temp=100&hum=100' <ip>:8080/api/state
+

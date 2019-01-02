@@ -203,5 +203,12 @@ setInterval(function(){
     chart4.update();
 }, 5000);
 
-
+$("#onoff").on('click', function(){
+    const req = new XMLHttpRequest();
+    req.open('GET', '/api/temperature', false); 
+    req.send(null);
+    if (req.status === 200) {
+        console.log("La led a changée d'état", req.response);
+    }
+})
 
