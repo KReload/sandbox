@@ -32,7 +32,7 @@ var dbClient = influxDBClient();
    
 
 func getHumidity(w http.ResponseWriter,r*http.Request){
-	q := client.NewQuery("SELECT hum FROM SUPER WHERE time > (now() - 5m)", MyDB, "s")
+	q := client.NewQuery("SELECT hum FROM dht22 WHERE time > (now() - 5m)", MyDB, "s")
 	if response, err := dbClient.Query(q); err == nil && response.Error() == nil {
 		valeursTemp := response.Results 
 		w.Header().Set("Content-Type", "application/json")
