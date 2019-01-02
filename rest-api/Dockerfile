@@ -11,4 +11,4 @@ FROM scratch
 COPY --from=build-env /go/bin/api-bob /go/bin/api-bob
 EXPOSE 8080
 
-CMD ["/go/bin/api-bob"]
+ENTRYPOINT ["/go/bin/api-bob"]
