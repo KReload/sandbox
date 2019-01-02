@@ -50,6 +50,25 @@ func getTemperature(w http.ResponseWriter,r*http.Request){
 	}
 }
 
+func getHumidityMqtt(w http.ResponseWriter,r*http.Request){
+	q := client.NewQuery("SELECT hum FROM mqttdht22 WHERE time > (now() - 5m)", MyDB, "s")
+	if response, err := dbClient.Query(q); err == nil && response.Error() == nil {
+		valeursTemp := response.Results 
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(valeursTemp)
+	}
+}
+
+func getTemperatureMqtt(w http.ResponseWriter,r*http.Request){
+	 
+	q := client.NewQuery("SELECT temp FROM mqttdht22 WHERE time > (now() - 5m)", MyDB, "s")
+	if response, err := dbClient.Query(q); err == nil && response.Error() == nil {
+		valeursTemp := response.Results
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(valeursTemp)	 
+	}
+}
+
 func writeTemp(c client.Client, temp int) {
 	temp_tags := map[string]string{"sensor": "temperature"}
 	temp_fields:= map[string]interface{}{
@@ -129,6 +148,8 @@ func main() {
 	//Manipulation des routes
 	r.HandleFunc("/api/humidity", getHumidity).Methods("GET")
 	r.HandleFunc("/api/temperature", getTemperature).Methods("GET")
+	r.HandleFunc("/api/mqtthumidity", getHumidityMqtt).Methods("GET")
+	r.HandleFunc("/api/mqtttemperature", getTemperatureMqtt).Methods("GET")
 	r.HandleFunc("/api/state", postState).Methods("POST")
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("."+STATIC_DIR)))
 
