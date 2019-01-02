@@ -11,4 +11,4 @@ FROM scratch
 COPY --from=build-env /go/src/api-bob/api-bob api-bob
 RUN chmod +x api-bob
 
-ENTRYPOINT ["./api-bob"]
+CMD ["./api-bob"]
