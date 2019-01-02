@@ -50,11 +50,35 @@ func getTemperature(w http.ResponseWriter,r*http.Request){
 	}
 }
 
-func writeDHT22(c client.Client, temp int, hum int) {
-	temp_tags := map[string]string{"sensor": "DHT22"}
+func writeTemp(c client.Client, temp int) {
+	temp_tags := map[string]string{"topic": "temperature"}
 	temp_fields:= map[string]interface{}{
-		"temp": temp,
-		"hum": hum,
+		"value": temp,
+	}
+	
+	// Create a new point batch
+	bp, err := client.NewBatchPoints(client.BatchPointsConfig{
+		Database:  MyDB,
+		Precision: "s",
+	})
+	
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	pt, err := client.NewPoint("dht22", temp_tags, temp_fields, time.Now())
+	if err != nil {
+		fmt.Println("Error: ", err.Error())
+	}
+	bp.AddPoint(pt)
+	c.Write(bp)
+
+}
+
+func writeHum(c client.Client, hum int) {
+	temp_tags := map[string]string{"topic": "humidity"}
+	temp_fields:= map[string]interface{}{
+		"value": hum,
 	}
 	
 	// Create a new point batch
@@ -88,7 +112,8 @@ func postState(w http.ResponseWriter,r*http.Request) {
 	if err != nil {
 		hum = 0
 	}
-	writeDHT22(dbClient, temp, hum)
+	writeTemp(dbClient, temp)
+	writeHum(dbClient,hum)
 }
 
 func main() {
