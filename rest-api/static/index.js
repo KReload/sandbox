@@ -199,6 +199,8 @@ setInterval(function(){
     chart4.data.datasets[0].data = dataMQTTHumidity;
     chart.update();
     chart2.update();
+    chart3.update();
+    chart4.update();
 }, 5000);
 
 
