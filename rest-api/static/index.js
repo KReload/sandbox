@@ -159,7 +159,7 @@ setInterval(function(){
 
     }
     console.log(humidityData);
-    if(humidityData[0].Series[0]!=null) {
+    if(humidityData[0].Series!=null) {
         dataHumidity = humidityData[0].Series[0].values.map(obj => {
             var res={};
             res.x = new Date(obj[0]*1000);
@@ -167,7 +167,7 @@ setInterval(function(){
             return res
         });
     }
-    if(temperatureData[0].Series[0]!=null) {
+    if(temperatureData[0].Series!=null) {
         dataTemperature = temperatureData[0].Series[0].values.map(obj => {
             var res={};
             res.x = new Date(obj[0]*1000);
@@ -175,7 +175,7 @@ setInterval(function(){
             return res
         });
     }
-    if(humidityMQTTData[0].Series[0]!=null) {
+    if(humidityMQTTData[0].Series!=null) {
         dataMQTTHumidity = humidityMQTTData[0].Series[0].values.map(obj => {
             var res={};
             res.x = new Date(obj[0]*1000);
@@ -183,7 +183,7 @@ setInterval(function(){
             return res
         });
     }
-    if(temperatureMQTTData[0].Series[0]!=null) {
+    if(temperatureMQTTData[0].Series!=null) {
         dataMQTTTemperature = temperatureMQTTData[0].Series[0].values.map(obj => {
             var res={};
             res.x = new Date(obj[0]*1000);
