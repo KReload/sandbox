@@ -9,7 +9,6 @@ RUN cd api-bob && go get -d -v && go build -v -o api-bob
 FROM scratch
 
 COPY --from=build-env /go/src/api-bob/api-bob api-bob
-RUN chmod +x api-bob
 EXPOSE 8080
 
 CMD ["./api-bob"]
