@@ -138,9 +138,17 @@ func postState(w http.ResponseWriter,r*http.Request) {
 func getLedStatus(w http.ResponseWriter,r*http.Request) {
 	q := client.NewQuery("SELECT LAST(value) FROM led", MyDB, "s")
 	if response, err := dbClient.Query(q); err == nil && response.Error() == nil {
-		valeurLed := response.Results 
+		val, check := response.Results[0].Series[0].Values[0][1].(json.Number).Int64();
+			
+		if check != nil {
+			fmt.Println("CHECKING: ", check, response.Results[0].Series[0].Values[0][1])
+			return
+		}
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(valeurLed)
+		strSend := interface{}{
+			"value": val,
+		}
+		json.NewEncoder(w).Encode(strSend)
 	}
 }
 
