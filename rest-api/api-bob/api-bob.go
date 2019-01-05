@@ -171,7 +171,7 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 		fmt.Println("Error: ", err.Error())
 	}
 	bp.AddPoint(pt)
-	c.Write(bp)
+	dbClient.Write(bp)
 
 }
 
