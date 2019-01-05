@@ -122,12 +122,12 @@ func writeHum(c client.Client, hum float64) {
 func postState(w http.ResponseWriter,r*http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	temp, err := strconv.ParseFloat(r.FormValue("temp"), 64)
-	fmt.Println(temp, err)
+	//fmt.Println(temp, err)
 	if err != nil {
 		temp = 0
 	}
 	hum, err := strconv.ParseFloat(r.FormValue("hum"), 64)
-	fmt.Println(hum, err)
+	//fmt.Println(hum, err)
 	if err != nil {
 		hum = 0
 	}
@@ -166,7 +166,7 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 			val, check := response.Results[0].Series[0].Values[0][1].(json.Number).Int64();
 			
 			if check != nil {
-				fmt.Println("CHECKING: ", check, response.Results[0].Series[0].Values[0][1])
+				//fmt.Println("CHECKING: ", check, response.Results[0].Series[0].Values[0][1])
 				return
 			}
 
