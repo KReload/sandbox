@@ -158,7 +158,7 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 			Database:  MyDB,
 			Precision: "s",
 		})
-		
+		fmt.Println("Valeur: ", valeurLed)
 		if err != nil {
 			log.Fatal(err)
 		}
