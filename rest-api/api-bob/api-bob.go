@@ -69,7 +69,7 @@ func getTemperatureMqtt(w http.ResponseWriter,r*http.Request){
 	}
 }
 
-func writeTemp(c client.Client, temp int) {
+func writeTemp(c client.Client, temp float64) {
 	temp_tags := map[string]string{"sensor": "temperature"}
 	temp_fields:= map[string]interface{}{
 		"temp": temp,
@@ -94,7 +94,7 @@ func writeTemp(c client.Client, temp int) {
 
 }
 
-func writeHum(c client.Client, hum int) {
+func writeHum(c client.Client, hum float64) {
 	temp_tags := map[string]string{"sensor": "humidity"}
 	temp_fields:= map[string]interface{}{
 		"hum": hum,
