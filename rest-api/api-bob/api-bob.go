@@ -150,14 +150,16 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 	if response, err := dbClient.Query(q); err == nil && response.Error() == nil {
 		led_tags := map[string]string{"nodemcu": "1"}
 		var led_fields map[string]interface{}
+		
 		fmt.Println("Valeur: ", response.Results[0])
 		if (len(response.Results[0].Series) == 0) {
 			led_fields= map[string]interface{}{
 				"value": true,
 			}
 		} else {
+			var val bool = response.Results[0].Series[0].Values[0][1]
 			led_fields= map[string]interface{}{
-				"value": !(response.Results[0].Series[0].Values[0][1]),
+				"value": !val,
 			}
 		}
 
@@ -166,7 +168,6 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 			Database:  MyDB,
 			Precision: "s",
 		})
-		fmt.Println("Valeur: ", valeurLed)
 		if err != nil {
 			log.Fatal(err)
 		}
