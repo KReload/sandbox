@@ -164,7 +164,7 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 				return
 			}
 
-			if valeur {
+			if valeur == 1 {
 				valeur = 0
 			} else {
 				valeur = 1
