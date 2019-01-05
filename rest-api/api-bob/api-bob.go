@@ -151,12 +151,13 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 		led_tags := map[string]string{"nodemcu": "1"}
 		var led_fields map[string]interface{}
 		
-		fmt.Println("Valeur: ", response.Results[0])
+		
 		if (len(response.Results[0].Series) == 0) {
 			led_fields= map[string]interface{}{
 				"value": 1,
 			}
 		} else {
+			fmt.Println("Valeur: ", response.Results[0].Series[0].Values[0][1])
 			if val, ok := response.Results[0].Series[0].Values[0][1].(int); ok {
 				if (val == 1) {
 					val = 0
