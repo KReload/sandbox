@@ -121,12 +121,12 @@ func writeHum(c client.Client, hum int) {
 
 func postState(w http.ResponseWriter,r*http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	temp, err := strconv.Atoi(r.FormValue("temp"))
+	temp, err := strconv.ParseFloat(r.FormValue("temp"), 64)
 	fmt.Println(temp, err)
 	if err != nil {
 		temp = 0
 	}
-	hum, err := strconv.Atoi(r.FormValue("hum"))
+	hum, err := strconv.ParseFloat(r.FormValue("hum"), 64)
 	fmt.Println(hum, err)
 	if err != nil {
 		hum = 0
