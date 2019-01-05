@@ -205,8 +205,8 @@ setInterval(function(){
 
 $("#onoff").on('click', function(){
     const req = new XMLHttpRequest();
-    req.open('GET', '/api/temperature', false); 
-    req.send(null);
+    req.open('POST', '/api/led', false); 
+    req.send('status=sended');
     if (req.status === 200) {
         console.log("La led a changée d'état", req.response);
     }
