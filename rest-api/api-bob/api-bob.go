@@ -149,11 +149,11 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 	q := client.NewQuery("SELECT LAST(value) FROM led", MyDB, "s")
 	if response, err := dbClient.Query(q); err == nil && response.Error() == nil {
 		led_tags := map[string]string{"nodemcu": "1"}
-		var led_fields map[string]interface{}
+		var led_fields map[int]interface{}
 		
 		
 		if (len(response.Results[0].Series) == 0) {
-			led_fields= map[string]interface{}{
+			led_fields= map[int]interface{}{
 				"value": 1,
 			}
 		} else {
@@ -162,7 +162,7 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 				if (strconv.ParseInt(val, 10, 64) == 1) {
 					valeur = 0
 				}
-				led_fields= map[string]interface{}{
+				led_fields= map[int]interface{}{
 					"value": valeur,
 				}
 			} else {
