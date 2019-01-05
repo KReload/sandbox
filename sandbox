@@ -78,15 +78,6 @@ sandbox () {
       docker-compose up -d --build
       echo "Opening tabs in browser..."
       sleep 3
-      if [ $(uname) == "Darwin" ]; then
-        open http://localhost:3010
-        open http://localhost:8888
-      elif [ $(uname) == "Linux" ]; then
-        sensible-browser http://localhost:8888
-        sensible-browser http://localhost:3010
-      else
-        echo "no browser detected..."
-      fi
       ;;
     down)
       echo "Stopping sandbox containers..."
@@ -113,13 +104,6 @@ sandbox () {
     influxdb)
       echo "Entering the influx cli..."
       docker-compose exec influxdb /usr/bin/influx
-      ;;
-    rebuild-docs)
-      echo "Rebuilding documentation container..."
-      docker build -t sandbox_documentation documentation/ > /dev/null 2>&1
-      echo "Restarting..."
-      docker-compose down > /dev/null 2>&1
-      docker-compose up -d --build > /dev/null 2>&1
       ;;
     enter)
       enter $@

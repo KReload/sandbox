@@ -8,3 +8,25 @@ h1 {
     text-align: center;
     padding-top: 5px;
 }
+
+
+.max-size {
+    padding-top: 56px;
+    margin-top: -56px;
+    height: 100vh;
+}
+
+
+#home {
+    background-color: grey;
+    padding-top: 56px;
+    height: 100vh;
+    margin-top: -56px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+html {
+    scroll-behavior: smooth;
+}
