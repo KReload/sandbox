@@ -157,7 +157,8 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 				"value": 1,
 			}
 		} else {
-			val, ok := response.Results[0].Series[0].Values[0][1].(string);
+			val, check := response.Results[0].Series[0].Values[0][1].(string);
+			fmt.Println("Error: ", check, response.Results[0].Series[0].Values[0][1].(type))
 			valeur, errconv := strconv.ParseInt(val, 10, 64)
 			if errconv != nil {
 				log.Fatal(errconv)
