@@ -157,9 +157,13 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 				"value": true,
 			}
 		} else {
-			var val bool = response.Results[0].Series[0].Values[0][1]
-			led_fields= map[string]interface{}{
-				"value": !val,
+			if val, ok := response.Results[0].Series[0].Values[0][1].(bool); ok {
+				led_fields= map[string]interface{}{
+					"value": !val,
+				}
+			} else {
+				log.Fatal(ok)
+				return
 			}
 		}
 
