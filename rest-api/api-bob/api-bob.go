@@ -159,7 +159,7 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 		} else {
 			val, ok := response.Results[0].Series[0].Values[0][1].(string);
 			valeur, errconv := strconv.ParseInt(val, 10, 64)
-			if errconv {
+			if errconv != nil {
 				log.Fatal(errconv)
 				return
 			}
