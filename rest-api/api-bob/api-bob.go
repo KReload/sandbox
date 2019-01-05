@@ -168,7 +168,6 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 				}
 			} else {
 				log.Fatal(ok)
-				return
 			}
 		}
 
