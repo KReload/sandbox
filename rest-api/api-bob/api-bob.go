@@ -157,9 +157,9 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 				"value": 1,
 			}
 		} else {
-			if val, ok := strconv.ParseInt(response.Results[0].Series[0].Values[0][1], 10, 64); !ok {
+			if val, ok := response.Results[0].Series[0].Values[0][1].(json.Number); ok {
 				valeur := 1
-				if (val) == 1 {
+				if (strconv.ParseInt(val, 10, 64) == 1) {
 					valeur = 0
 				}
 				led_fields= map[string]interface{}{
