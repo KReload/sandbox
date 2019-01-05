@@ -148,9 +148,9 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	q := client.NewQuery("SELECT LAST(value) FROM led", MyDB, "s")
 	if response, err := dbClient.Query(q); err == nil && response.Error() == nil {
-		valeurLed := response.Results 
+		var valeurLed []Result = response.Results 
 		led_tags := map[string]string{"nodemcu": "1"}
-		if(valeurLed == null) {
+		if(valeurLed == nil) {
 			led_fields:= map[string]interface{}{
 				"value": true,
 			}
