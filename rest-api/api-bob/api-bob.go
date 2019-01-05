@@ -157,16 +157,23 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 				"value": 1,
 			}
 		} else {
-			if val, ok := response.Results[0].Series[0].Values[0][1].(string); ok {
-				valeur := 1
-				if (strconv.ParseInt(val) == 1) {
-					valeur = 0
-				}
-				led_fields= map[string]interface{}{
-					"value": valeur,
-				}
+			val, ok := response.Results[0].Series[0].Values[0][1].(string);
+			valeur, errconv := strconv.ParseInt(val, 10, 64)
+			if errconv {
+				log.Fatal(errconv)
+				return
+			}
+			if valeur {
+				valeur = 0
+			} else {
+				valeur = 1
+			}
+			led_fields= map[string]interface{}{
+				"value": valeur,
+			}
 			} else {
 				log.Fatal(ok)
+				return
 			}
 		}
 
