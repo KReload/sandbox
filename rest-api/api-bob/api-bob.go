@@ -148,40 +148,35 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	q := client.NewQuery("SELECT LAST(value) FROM led", MyDB, "s")
 	if response, err := dbClient.Query(q); err == nil && response.Error() == nil {
+		led_tags := map[string]string{"nodemcu": "1"}
+		var led_fields map[string]interface{}
 		fmt.Println("Valeur: ", response.Results[0])
 		if (len(response.Results[0].Series) == 0) {
-			fmt.Println("VIDE: ")
+			led_fields= map[string]interface{}{
+				"value": true,
+			}
 		} else {
-			fmt.Println("ok")
+			led_fields= map[string]interface{}{
+				"value": response.Results[0].Series[0].Values[0][1],
+			}
 		}
-		//var valeurLed  = response.Results[0].Series[0];
-		//led_tags := map[string]string{"nodemcu": "1"}
-		//var led_fields map[string]interface{}
-		// if(valeurLed == nil) {
-		// 	led_fields= map[string]interface{}{
-		// 		"value": true,
-		// 	}
-		// } else {
-		// 	led_fields= map[string]interface{}{
-		// 		"value": valeurLed,
-		// 	}
-		// }
-		// 	// Create a new point batch
-		// bp, err := client.NewBatchPoints(client.BatchPointsConfig{
-		// 	Database:  MyDB,
-		// 	Precision: "s",
-		// })
-		// fmt.Println("Valeur: ", valeurLed)
-		// if err != nil {
-		// 	log.Fatal(err)
-		// }
 
-		// pt, err := client.NewPoint("led", led_tags, led_fields, time.Now())
-		// if err != nil {
-		// 	fmt.Println("Error: ", err.Error())
-		// }
-		// bp.AddPoint(pt)
-		// dbClient.Write(bp)
+			// Create a new point batch
+		bp, err := client.NewBatchPoints(client.BatchPointsConfig{
+			Database:  MyDB,
+			Precision: "s",
+		})
+		fmt.Println("Valeur: ", valeurLed)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		pt, err := client.NewPoint("led", led_tags, led_fields, time.Now())
+		if err != nil {
+			fmt.Println("Error: ", err.Error())
+		}
+		bp.AddPoint(pt)
+		dbClient.Write(bp)
 	} else {
 		log.Fatal(err)
 		return;
