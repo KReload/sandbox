@@ -151,7 +151,7 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 		valeurLed := response.Results 
 		led_tags := map[string]string{"nodemcu": "1"}
 		led_fields:= map[string]interface{}{
-			"value": !valeurLed,
+			"value": true,
 		}
 			// Create a new point batch
 		bp, err := client.NewBatchPoints(client.BatchPointsConfig{
