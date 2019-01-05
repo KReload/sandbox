@@ -157,8 +157,7 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 				"value": 1,
 			}
 		} else {
-			fmt.Println("Valeur: ", response.Results[0].Series[0].Values[0][1])
-			if val, ok := response.Results[0].Series[0].Values[0][1].(int); ok {
+			if val := response.Results[0].Series[0].Values[0][1] {
 				if (val == 1) {
 					val = 0
 				} else {
@@ -168,7 +167,7 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 					"value": val,
 				}
 			} else {
-				log.Fatal(ok)
+				log.Fatal(val)
 			}
 		}
 
