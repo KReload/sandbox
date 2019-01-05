@@ -150,6 +150,7 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 	if response, err := dbClient.Query(q); err == nil && response.Error() == nil {
 		var valeurLed  = response.Results[0].Series[0].Values[0][1];
 		led_tags := map[string]string{"nodemcu": "1"}
+		var led_fields map[string]interface{}
 		if(valeurLed == nil) {
 			led_fields= map[string]interface{}{
 				"value": true,
