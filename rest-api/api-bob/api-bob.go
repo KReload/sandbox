@@ -145,7 +145,7 @@ func getLedStatus(w http.ResponseWriter,r*http.Request) {
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
-		strSend := interface{"value": val}
+		strSend := map[string]interface{}{"value": val}
 		json.NewEncoder(w).Encode(strSend)
 	}
 }
