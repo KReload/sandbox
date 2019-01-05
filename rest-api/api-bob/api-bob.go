@@ -163,17 +163,15 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 				log.Fatal(errconv)
 				return
 			}
+
 			if valeur {
 				valeur = 0
 			} else {
 				valeur = 1
 			}
+
 			led_fields= map[string]interface{}{
 				"value": valeur,
-			}
-			} else {
-				log.Fatal(ok)
-				return
 			}
 		}
 
