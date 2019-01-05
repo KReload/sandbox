@@ -157,7 +157,7 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 				"value": 1,
 			}
 		} else {
-			if val := response.Results[0].Series[0].Values[0][1].(int) {
+			if val, ok := response.Results[0].Series[0].Values[0][1].(int); ok {
 				if (val == 1) {
 					val = 0
 				} else {
