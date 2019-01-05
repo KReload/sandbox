@@ -157,7 +157,7 @@ func postLedState(w http.ResponseWriter,r*http.Request) {
 			}
 		} else {
 			led_fields= map[string]interface{}{
-				"value": response.Results[0].Series[0].Values[0][1],
+				"value": !(response.Results[0].Series[0].Values[0][1]),
 			}
 		}
 
