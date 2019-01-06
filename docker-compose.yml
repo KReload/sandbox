@@ -42,25 +42,6 @@ services:
       - influxdb
       - mosquitto
 
-  kapacitor:
-  # Full tag list: https://hub.docker.com/r/library/kapacitor/tags/
-    build:
-      context: ./images/kapacitor/
-      dockerfile: ./${TYPE}/Dockerfile
-      args:
-        KAPACITOR_TAG: ${KAPACITOR_TAG}
-    image: "kapacitor"
-    volumes:
-      # Mount for kapacitor data directory
-      - ./kapacitor/data/:/var/lib/kapacitor
-      # Mount for kapacitor configuration
-      - ./kapacitor/config/:/etc/kapacitor/
-    # Kapacitor requires network access to Influxdb
-    links:
-      - influxdb
-    ports:
-      # The API for Kapacitor is served on port 9092
-      - "9092:9092"
   mosquitto:
     container_name: mosquitto
     image: eclipse-mosquitto
