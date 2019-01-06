@@ -70,7 +70,6 @@ services:
       # The WebUI for Chronograf is served on port 8888
       - "8888:8888"
     depends_on:
-      - kapacitor
       - influxdb
       - telegraf
 
