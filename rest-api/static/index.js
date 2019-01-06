@@ -212,3 +212,38 @@ $("#onoff").on('click', function(){
     }
 })
 
+//MQTT
+
+const client = new Paho.MQTT.Client("sensor.sorbonneiot.xyz", 9001, "CLIENT" + new Date().getTime());
+const myTopic = "led"
+
+client.connect({ onSuccess: onConnect })
+
+
+const publish = (topic, msg) => {
+    let message = new Paho.MQTT.Message(msg);
+    message.destinationName = topic;
+    client.send(message);
+}
+
+function onConnect() {
+  console.log("connection successful")
+  $("#onoffmqtt").on('click', function(){
+    console.log("toggled")
+    publish(myTopic,`toggle`)
+  })
+}
+
+
+client.onConnectionLost = onConnectionLost;
+
+function onConnectionLost(responseObject) {
+    if(responseObject.errorCode !== 0) {
+        console.log("onConnectionLost" + responseObject.errorMessage);
+    }
+    client.connect({onSuccess: onConnect});
+}
+   
+
+
+
